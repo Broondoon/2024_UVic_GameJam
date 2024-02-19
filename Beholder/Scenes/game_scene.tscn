@@ -1,6 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfhes6n1fjjym"]
+[gd_scene load_steps=13 format=3 uid="uid://cfhes6n1fjjym"]
 
+[ext_resource type="Shader" path="res://Shaders/eyeball_viewport.gdshader" id="1_8i3hl"]
+[ext_resource type="Texture2D" uid="uid://b8okiqgs4xkvx" path="res://Art/Eyeball/Eye States Sheet.png" id="1_btymh"]
 [ext_resource type="Texture2D" uid="uid://cu1gvkh5vxk6f" path="res://Art/Dev_Asset_Thurg_Guy.png" id="1_wh0k0"]
+[ext_resource type="Texture2D" uid="uid://dwotyktc0nm5" path="res://Art/Eyeball/Dev Asset - Eyeball Viewport.png" id="2_jryio"]
+[ext_resource type="Texture2D" uid="uid://di7v4ki0uacr6" path="res://Art/Eyeball/Eyeball View Hole.png" id="5_7xi6p"]
+[ext_resource type="Texture2D" uid="uid://cyts4bu3p7kbc" path="res://Art/Eyeball/Just The Eye.png" id="6_kqsfi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4brss"]
+atlas = ExtResource("1_btymh")
+region = Rect2(0, 0, 480, 370)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1jvq"]
+atlas = ExtResource("1_btymh")
+region = Rect2(481, 0, 480, 370)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27h5l"]
+atlas = ExtResource("1_btymh")
+region = Rect2(962, 0, 480, 370)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3as38"]
+atlas = ExtResource("1_btymh")
+region = Rect2(1443, 0, 480, 370)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e5p72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4brss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1jvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27h5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3as38")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uim75"]
+shader = ExtResource("1_8i3hl")
+shader_parameter/mask = ExtResource("2_jryio")
 
 [node name="GameScene" type="Node2D"]
 
@@ -14,20 +59,81 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.196078, 0.380392, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_right = 0.403
-anchor_bottom = 0.574
-offset_right = -0.256042
-offset_bottom = 0.0480042
+[node name="The Eye" type="AnimatedSprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(243, 196)
+sprite_frames = SubResource("SpriteFrames_e5p72")
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("5_7xi6p")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/HBoxContainer/VBoxContainer/TextureRect"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_uim75")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 67.0
+offset_top = -1.0
+offset_right = -69.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/HBoxContainer/VBoxContainer/TextureRect/SubViewportContainer"]
 handle_input_locally = false
+size = Vector2i(434, 318)
 render_target_update_mode = 4
 
-[node name="Sprite3D" type="Sprite3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13798)
+[node name="Sprite3D" type="Sprite3D" parent="CanvasLayer/HBoxContainer/VBoxContainer/TextureRect/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
 texture = ExtResource("1_wh0k0")
 
-[node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/HBoxContainer/VBoxContainer/TextureRect/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.33139)
+
+[node name="Eyeball TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/VBoxContainer/TextureRect"]
+visible = false
+modulate = Color(1, 1, 1, 0.47451)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_kqsfi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bottom Left Panel" type="Control" parent="CanvasLayer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
