@@ -12,7 +12,7 @@ The game jam is either 48 or 72 hours long, spread out across an entire week. Gi
 - Feb 18
   - Hour 1 [3:00pm]: GitHub repo creation, Godot project creation, theme reveal and project planning
   - Hour 2 [5:00pm]: Basic tutorials (UI, text features)
-  Feb 19
+- Feb 19
   - Hour 3/4 [10am - 12pm]: Mask shader tutorial, UI container stuff, more planning
 
 Now it was at this point in which the looming shadows of the proverbial guillotines that were my exam and midterm deadlines became too much. I realized that I really shouldn't be doing a game jam with such heavy projects requiring my attention. I had to capitulate to their demands! So I did not finish the game jam unfortuately.
