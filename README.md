@@ -19,7 +19,7 @@ Now it was at this point in which the looming shadows of the proverbial guilloti
 
 Although I still really like the concept and what I was working towards, so I'll still treat this as a pseudo game jam. I'll continue to log my hours, putting in work when I can, and stopping once I've hit the limit.
 
-  Feb 28/29
-  - Hour 5 [6pm ~ 6:30pm, 12:30pm ~ 1pm]
+- Feb 28/29
+  - Hour 5 [6pm ~ 6:30pm, 12:30pm ~ 1pm]: UI asset creation (looks bad lol, but I like it), more messing with UI layout, things starting to visually come together.
  
 Hours remaining: [43] [67]
